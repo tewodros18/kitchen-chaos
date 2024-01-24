@@ -6,10 +6,34 @@ public class Player : MonoBehaviour {
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private GameInput gameInput;
   
-
     private bool isWalking;
+    private Vector3 lastInteractDir;
+
     private void Update() {
         HandleMovement();
+        HandleInteractoin();
+    }
+
+    public bool IsWalking() {
+        return isWalking;
+    }
+
+
+    private void HandleInteractoin() {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if(moveDir != Vector3.zero) {
+            lastInteractDir = moveDir;
+        }
+
+
+        float interactDist = 2f;
+
+        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDist)) {
+            Debug.Log(raycastHit.transform);
+        }
+
     }
 
     private void HandleMovement() {
@@ -26,19 +50,19 @@ public class Player : MonoBehaviour {
 
         if (!canMove) {
             //can not move in the forward directions
-            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
             if (canMove) {
                 moveDir = moveDirX;
             }
             else {
-                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
                 canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
                 if (canMove) {
                     moveDir = moveDirZ;
                 }
                 else {
-                    //can not move in any directoin
+                    //can not move in any direction
                 }
             }
         }
@@ -56,7 +80,5 @@ public class Player : MonoBehaviour {
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * roatationSpeed);
     }
 
-    public bool IsWalking() {
-        return isWalking;
-    }
+    
 }
