@@ -12,6 +12,7 @@ public class GameInput : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
+        //register to the button press event
         playerInputActions.Player.Interact.performed += Interact_performed;
     }
 

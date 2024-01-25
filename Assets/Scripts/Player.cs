@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,23 @@ public class Player : MonoBehaviour {
     private Vector3 lastInteractDir;
     private ClearCounter selectedCounter;
 
+    public static Player Instance{ get; private set;}
+
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : EventArgs {
+        public ClearCounter selectedCounter;
+    }
+
+    private void Awake() {
+        if(Instance != null) {
+            Debug.LogError("There is more than one player");
+        }
+        Instance = this;
+    }
+
     private void Start() {
+        //Put things in start if they are referring to stuff from other classes because on Awake they might be null
         gameInput.OnInteractActions += GameInput_OnInteractActions;
     }
 
@@ -46,18 +63,19 @@ public class Player : MonoBehaviour {
             //Debug.Log(raycastHit.transform);
             if(raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
                 if(clearCounter != selectedCounter) {
-                    selectedCounter = clearCounter;
+                    SetSelectedCounter(clearCounter);
                 }
             }
             else {
-                selectedCounter = null;
+                SetSelectedCounter(null);
             }
         }
         else {
-            selectedCounter = null;
+  
+            SetSelectedCounter(null);
         }
 
-        Debug.Log(selectedCounter);
+        
 
     }
 
@@ -103,6 +121,15 @@ public class Player : MonoBehaviour {
 
         float roatationSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * roatationSpeed);
+    }
+
+
+    private void SetSelectedCounter(ClearCounter selectedCounter) {
+        this.selectedCounter = selectedCounter;
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs {
+            selectedCounter = selectedCounter
+        });
+
     }
 
     
