@@ -79,14 +79,43 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6903472389846600637}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5449551145753092739, guid: fa39a3283885b5243afac3ff18b99951,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2799157668559438945}
   m_SourcePrefab: {fileID: 100100000, guid: fa39a3283885b5243afac3ff18b99951, type: 3}
+--- !u!4 &2396397340569810474 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 487966787216474626, guid: fa39a3283885b5243afac3ff18b99951,
+    type: 3}
+  m_PrefabInstance: {fileID: 2847451005587600424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4909281653892869382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7180259793150466350, guid: fa39a3283885b5243afac3ff18b99951,
     type: 3}
   m_PrefabInstance: {fileID: 2847451005587600424}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7792525322461583019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5449551145753092739, guid: fa39a3283885b5243afac3ff18b99951,
+    type: 3}
+  m_PrefabInstance: {fileID: 2847451005587600424}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2799157668559438945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792525322461583019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0d12025bfbf7e40a7bc8f094a6f28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counterTopPoint: {fileID: 2396397340569810474}
 --- !u!1001 &3534052334344343518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -320,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65784ecabf4b1a942bcb23b3facafaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCounter: {fileID: 0}
+  baseCounter: {fileID: 2799157668559438945}
   visualGameObjectArray:
   - {fileID: 1157611814831997887}
   - {fileID: 2954250037678942038}
