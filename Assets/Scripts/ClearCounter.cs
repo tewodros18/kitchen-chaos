@@ -8,8 +8,18 @@ public class ClearCounter : BaseCounter
     
 
     public override void Interact(Player player) {
-             
-        //Debug.Log(kitcheObjectTransform.GetComponent<KitchenObject>().GetKitchenObjectSO().objectName);
+        if (!HasKitchenObject() && player.HasKitchenObject()) {
+            //accept kitchen object
+            player.GetKitchenObject().SetKitchenObjectParent(this);
+        }
+        else if(HasKitchenObject() && !player.HasKitchenObject()) {
+            //counter has object and give to player
+            GetKitchenObject().SetKitchenObjectParent(player);
+        }
+        else {
+            //can niether give or take kitchen object
+            Debug.Log("can neither give or receive");
+        }
     }
 
    
