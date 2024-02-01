@@ -32,6 +32,13 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
     private void Start() {
         //Put things in start if they are referring to stuff from other classes because on Awake they might be null
         gameInput.OnInteractActions += GameInput_OnInteractActions;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+    }
+
+    private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
+        if (selectedCounter != null) {
+            selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void GameInput_OnInteractActions(object sender, System.EventArgs e) {
