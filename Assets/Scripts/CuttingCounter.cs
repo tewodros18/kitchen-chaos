@@ -12,6 +12,9 @@ public class CuttingCounter : BaseCounter
     public class OnProgressChangedEventArgs : EventArgs {
         public float progressNormalized;
     }
+
+    public event EventHandler OnCut;
+
     
 
     public override void Interact(Player player) {
@@ -38,6 +41,8 @@ public class CuttingCounter : BaseCounter
         if (HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectSO())) {
             //there is a kitchen object on the cutting couter
             cuttingProgress++;
+
+            OnCut?.Invoke(this, EventArgs.Empty); 
 
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
