@@ -8,18 +8,32 @@ public class ClearCounter : BaseCounter
     
 
     public override void Interact(Player player) {
-        if (!HasKitchenObject() && player.HasKitchenObject()) {
-            //accept kitchen object
-            player.GetKitchenObject().SetKitchenObjectParent(this);
-        }
-        else if(HasKitchenObject() && !player.HasKitchenObject()) {
-            //counter has object and give to player
-            GetKitchenObject().SetKitchenObjectParent(player);
+        if (!HasKitchenObject()) {
+            if (player.HasKitchenObject()) {
+                //accept kitchen object
+                player.GetKitchenObject().SetKitchenObjectParent(this);
+            }
+            else {
+                //player is not carrying item
+            }
+
+            
         }
         else {
-            //can niether give or take kitchen object
-            Debug.Log("can neither give or receive");
+            if (player.HasKitchenObject()) {
+                //player is carrying something
+                if(player.GetKitchenObject() is PlateKitchenObject) {
+                    PlateKitchenObject plateKitchenObject = player.GetKitchenObject() as PlateKitchenObject;
+                    plateKitchenObject.AddIngredient(GetKitchenObject().GetKitchenObjectSO());
+                    GetKitchenObject().DestroySelf();
+                }
+            }
+            else {
+                //counter has object and give to player
+                GetKitchenObject().SetKitchenObjectParent(player);
+            }
         }
+        
     }
 
    
