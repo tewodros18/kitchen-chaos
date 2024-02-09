@@ -29,9 +29,20 @@ public class CuttingCounter : BaseCounter , IHasProgress
             }
             
         }
-        else if (HasKitchenObject() && !player.HasKitchenObject()) {
-            //counter has object and give to player
-            GetKitchenObject().SetKitchenObjectParent(player);
+        else {
+            if (player.HasKitchenObject()) {
+                //player is carrying something 
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) {
+                    if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO())) {
+                        GetKitchenObject().DestroySelf();
+                    }
+                }
+            }
+            else {
+                //counter has object and give to player
+                GetKitchenObject().SetKitchenObjectParent(player);
+            }
+                
         }
     }
 
