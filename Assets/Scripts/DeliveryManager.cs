@@ -8,6 +8,8 @@ public class DeliveryManager : MonoBehaviour
 
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
+    public event EventHandler OnDeliverySuccess;
+    public event EventHandler OnDeliveryFailure; 
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -67,12 +69,16 @@ public class DeliveryManager : MonoBehaviour
                     Debug.Log("delivered"); 
                     waitingRecipeSOList.RemoveAt(i);
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+                    OnDeliverySuccess?.Invoke(this, EventArgs.Empty);
                     return;
                 }
                 
             }
         }
-        
+        //wrong delivery 
+        OnDeliveryFailure?.Invoke(this, EventArgs.Empty);
+
+
     }
 
 
