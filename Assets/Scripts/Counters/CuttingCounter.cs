@@ -12,6 +12,7 @@ public class CuttingCounter : BaseCounter , IHasProgress
     
 
     public event EventHandler OnCut;
+    public static event EventHandler OnAnyCut;
 
     
 
@@ -51,7 +52,8 @@ public class CuttingCounter : BaseCounter , IHasProgress
             //there is a kitchen object on the cutting couter
             cuttingProgress++;
 
-            OnCut?.Invoke(this, EventArgs.Empty); 
+            OnCut?.Invoke(this, EventArgs.Empty);
+            OnAnyCut?.Invoke(this, EventArgs.Empty);
 
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
