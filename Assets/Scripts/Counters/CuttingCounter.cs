@@ -41,7 +41,9 @@ public class CuttingCounter : BaseCounter , IHasProgress
             }
             else {
                 //counter has object and give to player
-                GetKitchenObject().SetKitchenObjectParent(player);
+                if (HasKitchenObject()) {
+                    GetKitchenObject().SetKitchenObjectParent(player);
+                }
             }
                 
         }

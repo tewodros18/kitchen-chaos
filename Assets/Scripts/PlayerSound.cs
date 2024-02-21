@@ -8,8 +8,8 @@ public class PlayerSound : MonoBehaviour
     private float footstepTimer;
     private float footstepTimerMax = .1f;
 
-    private void Awake() {
-        player = GetComponent<Player>();
+    private void Start() {
+        player = GetComponent<Player>(); 
     }
 
     private void Update() {
