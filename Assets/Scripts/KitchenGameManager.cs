@@ -64,6 +64,10 @@ public class KitchenGameManager : MonoBehaviour
         return state == State.CountdownToStart; 
     }
 
+    public bool IsGameOver() {
+        return state == State.GameOver; 
+    }
+
     public float GetCountdownToStartTimer() {
         return countdownToStartTimer;
     }
