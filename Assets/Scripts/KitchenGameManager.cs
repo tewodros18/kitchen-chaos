@@ -19,7 +19,9 @@ public class KitchenGameManager : MonoBehaviour
     private State state;
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
-    private float gamePlayingTime = 10f;
+    private float gamePlayingTime;
+    private float gamePlayingTimeMax = 60f;
+
 
     private void Awake() {
         Instance = this; 
@@ -39,6 +41,7 @@ public class KitchenGameManager : MonoBehaviour
                 countdownToStartTimer -= Time.deltaTime;
                 if (countdownToStartTimer < 0f) {
                     state = State.GamePlaying;
+                    gamePlayingTime = gamePlayingTimeMax; 
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
 
                 }
@@ -70,6 +73,11 @@ public class KitchenGameManager : MonoBehaviour
 
     public float GetCountdownToStartTimer() {
         return countdownToStartTimer;
+    }
+
+    public float GetGamePlayingTimerNormalized() {
+        //because you are counting down from 10 to zero using timedelta time so reversed
+        return 1 - (gamePlayingTime / gamePlayingTimeMax);
     }
 
 }
