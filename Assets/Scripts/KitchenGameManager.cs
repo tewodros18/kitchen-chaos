@@ -77,6 +77,7 @@ public class KitchenGameManager : MonoBehaviour
 
     public float GetGamePlayingTimerNormalized() {
         //because you are counting down from 10 to zero using timedelta time so reversed
+        //if you want it to be in decreasing order then there should be no alternative for
         return 1 - (gamePlayingTime / gamePlayingTimeMax);
     }
 
