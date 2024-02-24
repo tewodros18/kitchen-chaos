@@ -21,11 +21,20 @@ public class KitchenGameManager : MonoBehaviour
     private float countdownToStartTimer = 3f;
     private float gamePlayingTime;
     private float gamePlayingTimeMax = 60f;
+    private bool isGamePaused = false;
 
 
     private void Awake() {
         Instance = this; 
         state = State.WaitingToStart;
+    }
+
+    private void Start() {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e) {
+        TogglePauseGame();
     }
 
     private void Update() {
@@ -79,6 +88,17 @@ public class KitchenGameManager : MonoBehaviour
         //because you are counting down from 10 to zero using timedelta time so reversed
         //if you want it to be in decreasing order then there should be no alternative for
         return 1 - (gamePlayingTime / gamePlayingTimeMax);
+    }
+
+    private void TogglePauseGame() {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused) {
+            Time.timeScale = 0f;
+        }
+        else {
+            Time.timeScale = 1f;
+
+        }
     }
 
 }
