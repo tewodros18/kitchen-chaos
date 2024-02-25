@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour
 {
-
+ 
     public static KitchenGameManager Instance { get; private set; }
     public event EventHandler OnStateChanged;
     public event EventHandler OnGamePaused;
@@ -93,7 +93,7 @@ public class KitchenGameManager : MonoBehaviour
         return 1 - (gamePlayingTime / gamePlayingTimeMax);
     }
 
-    private void TogglePauseGame() {
+    public void TogglePauseGame() {
         isGamePaused = !isGamePaused;
         if (isGamePaused) {
             Time.timeScale = 0f;
