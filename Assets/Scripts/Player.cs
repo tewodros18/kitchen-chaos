@@ -18,6 +18,10 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
 
     public static event EventHandler OnPickedSomething;
 
+    public static void ResetStaticData() {
+        OnPickedSomething = null;
+    }
+
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs {
