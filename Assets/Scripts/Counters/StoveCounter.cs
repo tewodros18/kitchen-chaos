@@ -121,14 +121,17 @@ public class StoveCounter : BaseCounter, IHasProgress
                 });
             } else {
                 //counter has object and give to player
-                GetKitchenObject().SetKitchenObjectParent(player);
-                state = State.Idle;
-                OnStateChanged?.Invoke(this, new OnStateChangedEvenArgs {
-                    state = state
-                });
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                    progressNormalized = 0f
-                });
+                if (HasKitchenObject()) {
+                    GetKitchenObject().SetKitchenObjectParent(player);
+                    state = State.Idle;
+                    OnStateChanged?.Invoke(this, new OnStateChangedEvenArgs {
+                        state = state
+                    });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                        progressNormalized = 0f
+                    });
+                }
+                
             }  
         }
     }

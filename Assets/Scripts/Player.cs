@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IkitchenObjectParent {
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 9f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterLayersMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
@@ -112,6 +112,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
 
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
 
+
         if (!canMove) {
             //can not move in the forward directions
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
@@ -140,7 +141,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
 
         isWalking = moveDir != Vector3.zero;
 
-        float roatationSpeed = 10f;
+        float roatationSpeed = 9f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * roatationSpeed);
     }
 
