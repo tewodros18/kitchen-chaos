@@ -9456,6 +9456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receipesDeliveredText: {fileID: 1731697974}
+  mainMenuButton: {fileID: 1994610555}
 --- !u!1 &2086227981
 GameObject:
   m_ObjectHideFlags: 0
