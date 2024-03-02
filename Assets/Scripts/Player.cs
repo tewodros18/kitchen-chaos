@@ -9,6 +9,10 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
     [SerializeField] private LayerMask counterLayersMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
+    
+
+
+
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
@@ -60,8 +64,9 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
     }
 
     private void Update() {
+
         HandleMovement();
-        HandleInteractoin();
+        HandleInteraction();
     }
 
     public bool IsWalking() {
@@ -69,7 +74,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
     }
 
 
-    private void HandleInteractoin() {
+    private void HandleInteraction() {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -141,7 +146,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
 
         isWalking = moveDir != Vector3.zero;
 
-        float roatationSpeed = 9f;
+        float roatationSpeed = 5f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * roatationSpeed);
     }
 
