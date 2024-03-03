@@ -25,7 +25,7 @@ public class DeliveryManager : MonoBehaviour
     private void Awake() {
         Instance = this;
         waitingRecipeSOList = new List<RecipeSO>();
-        //Application.targetFrameRate = 300;
+        Application.targetFrameRate = 300;
     }
 
     private void Update() {
