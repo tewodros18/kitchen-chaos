@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IkitchenObjectParent {
-    [SerializeField] private float moveSpeed = 9f;
+    [SerializeField] private float moveSpeed = 6.5f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterLayersMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
@@ -121,13 +121,13 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
         if (!canMove) {
             //can not move in the forward directions
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            canMove = (moveDir.x < -.53f || moveDir.x > +.53f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
             if (canMove) {
                 moveDir = moveDirX;
             }
             else {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                canMove = (moveDir.z < -.53f || moveDir.z > +.53f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
                 if (canMove) {
                     moveDir = moveDirZ;
                 }
@@ -146,7 +146,7 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
 
         isWalking = moveDir != Vector3.zero;
 
-        float roatationSpeed = 5f;
+        float roatationSpeed = 3.5f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * roatationSpeed);
     }
 

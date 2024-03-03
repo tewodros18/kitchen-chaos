@@ -100,10 +100,10 @@
                 },
                 {
                     "name": "",
-                    "id": "ed5a594f-5e48-4817-b40e-40812af2b71e",
-                    "path": "<AndroidJoystick>/stick",
+                    "id": "4cd41a53-bddc-4b4c-b283-4115ebb4b828",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.5)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
