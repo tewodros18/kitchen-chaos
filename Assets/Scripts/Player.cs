@@ -124,21 +124,24 @@ public class Player : MonoBehaviour, IkitchenObjectParent {
             canMove = (moveDir.x < -.53f || moveDir.x > +.53f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
             if (canMove) {
                 moveDir = moveDirX;
+                moveDistance = moveDistance / 2;
             }
             else {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
                 canMove = (moveDir.z < -.53f || moveDir.z > +.53f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
                 if (canMove) {
                     moveDir = moveDirZ;
+                    moveDistance = moveDistance / 2;
+
                 }
                 else {
                     //can not move in any direction
                 }
             }
         }
+        
 
-
-        if (canMove) {
+            if (canMove) {
             transform.position += moveDir * moveDistance;
         }
 
